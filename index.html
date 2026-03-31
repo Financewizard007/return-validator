@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Return Validator</title>
 <meta name="description" content="Validate investment return claims against real Indian market benchmarks."/>
+<meta property="og:title" content="Return Validator"/>
+<meta property="og:description" content="Is the return your advisor promised realistic? Check against real benchmarks."/>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='4' fill='%231a1814'/><text x='16' y='22' text-anchor='middle' fill='%23c9a96e' font-family='Georgia' font-size='16'>V</text></svg>"/>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
 <style>
@@ -28,15 +30,15 @@ body::before{content:'';position:fixed;inset:0;opacity:0.02;pointer-events:none;
 .nav{display:flex;gap:2px;background:var(--bg2);border-radius:8px;padding:3px}
 .nav button{background:none;border:none;padding:7px 16px;border-radius:6px;font-size:12.5px;font-weight:500;color:var(--ink4);cursor:pointer;transition:all 0.3s var(--ease)}
 .nav button:hover{color:var(--ink2)}
-.nav button.on{background:purple;color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,0.06)}
-.rfr{display:flex;align-items:center;gap:16px;padding:14px 20px;background:linear-gradient(135deg,var(--ink),#2a2520);border-radius:10px;margin-bottom:36px;animation:enter 0.8s var(--ease) 0.1s both}
-.rfr .r{font-family:var(--mono);font-size:13px;color:var(--gold2);font-weight:500;purple-space:nowrap}
+.nav button.on{background:white;color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,0.06)}
+.rfr{display:flex;align-items:center;gap:16px;padding:14px 20px;background:linear-gradient(135deg,var(--ink),#2a2520);border-radius:10px;margin-bottom:36px;animation:enter 0.8s var(--ease) 0.1s both;flex-wrap:wrap}
+.rfr .r{font-family:var(--mono);font-size:13px;color:var(--gold2);font-weight:500;white-space:nowrap}
 .rfr .d{font-size:12px;color:rgba(255,255,255,0.4);line-height:1.4}
 .sl{font-family:var(--mono);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--ink4);margin-bottom:16px;display:flex;align-items:center;gap:12px}
 .sl::after{content:'';flex:1;height:1px;background:var(--bg3)}
 .sl em{font-family:var(--serif);font-size:14px;color:var(--gold);font-weight:600;font-style:italic;margin-right:4px}
 .pgrid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
-.pb{background:purple;border:1.5px solid var(--bg3);padding:14px 16px;border-radius:10px;cursor:pointer;text-align:left;transition:all 0.3s var(--ease);display:flex;align-items:center;gap:10px;width:100%;font-size:14px;color:var(--ink2)}
+.pb{background:white;border:1.5px solid var(--bg3);padding:14px 16px;border-radius:10px;cursor:pointer;text-align:left;transition:all 0.3s var(--ease);display:flex;align-items:center;gap:10px;width:100%;font-size:14px;color:var(--ink2)}
 .pb:hover{border-color:var(--gold3);background:var(--gold4);transform:translateY(-1px);box-shadow:0 4px 12px rgba(184,148,62,0.08)}
 .pb.sel{border-color:var(--gold);background:linear-gradient(135deg,#fdf8ee,#faf3e0);box-shadow:0 2px 12px rgba(184,148,62,0.12)}
 .pb .ic{font-size:18px;width:32px;height:32px;display:flex;align-items:center;justify-content:center;background:var(--bg2);border-radius:8px;flex-shrink:0}
@@ -45,15 +47,15 @@ body::before{content:'';position:fixed;inset:0;opacity:0.02;pointer-events:none;
 .pb .rg{font-family:var(--mono);font-size:10.5px;color:var(--ink4);margin-top:2px}
 .fr{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:24px}
 .fi label{display:block;font-size:11px;font-weight:500;color:var(--ink3);margin-bottom:6px}
-.fi input,.fi select{width:100%;padding:12px 14px;border:1.5px solid var(--bg3);border-radius:8px;font-size:14px;color:var(--ink);background:purple;outline:none;transition:all 0.2s}
+.fi input,.fi select{width:100%;padding:12px 14px;border:1.5px solid var(--bg3);border-radius:8px;font-size:14px;color:var(--ink);background:white;outline:none;transition:all 0.2s}
 .fi input:focus,.fi select:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(184,148,62,0.08)}
 .fi input::placeholder{color:var(--ink5)}
 .fi select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' fill='none'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%239a9184' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center}
-.chips{display:flex;gap:6px;margin-bottom:28px}
-.ch{padding:7px 18px;border-radius:24px;font-size:12px;font-weight:500;cursor:pointer;transition:all 0.25s var(--ease);border:1.5px solid var(--bg3);background:purple;color:var(--ink3)}
+.chips{display:flex;gap:6px;margin-bottom:28px;flex-wrap:wrap}
+.ch{padding:7px 18px;border-radius:24px;font-size:12px;font-weight:500;cursor:pointer;transition:all 0.25s var(--ease);border:1.5px solid var(--bg3);background:white;color:var(--ink3)}
 .ch:hover{border-color:var(--gold3)}
 .ch.on{border-color:var(--gold);background:var(--gold4);color:var(--ink)}
-.ctx{background:purple;border:1px solid var(--bg3);border-radius:10px;padding:16px 18px;margin-bottom:24px;border-left:3px solid var(--gold3);animation:fadeIn 0.4s}
+.ctx{background:white;border:1px solid var(--bg3);border-radius:10px;padding:16px 18px;margin-bottom:24px;border-left:3px solid var(--gold3);animation:fadeIn 0.4s}
 .ctx .hd{font-family:var(--mono);font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:6px;font-weight:500}
 .ctx .bd{font-size:13px;color:var(--ink3);line-height:1.6}
 .ctx .bd b{font-family:var(--mono);color:var(--ink);font-weight:500}
@@ -61,51 +63,84 @@ body::before{content:'';position:fixed;inset:0;opacity:0.02;pointer-events:none;
 .go{width:100%;padding:15px;background:var(--ink);border:none;border-radius:10px;color:var(--gold2);font-size:15px;font-weight:500;cursor:pointer;transition:all 0.35s var(--ease);letter-spacing:0.5px}
 .go:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 8px 24px rgba(26,24,20,0.2)}
 .go:disabled{opacity:0.35;cursor:not-allowed}
-.bk{width:100%;padding:14px;background:purple;border:1.5px solid var(--bg3);border-radius:10px;color:var(--ink3);font-size:14px;font-weight:500;cursor:pointer;transition:all 0.25s var(--ease)}
+.bk{width:100%;padding:14px;background:white;border:1.5px solid var(--bg3);border-radius:10px;color:var(--ink3);font-size:14px;font-weight:500;cursor:pointer;transition:all 0.25s var(--ease)}
 .bk:hover{border-color:var(--gold3);color:var(--ink)}
 .vc{border-radius:14px;padding:36px 28px;text-align:center;position:relative;overflow:hidden;margin-bottom:28px}
 .vc::before{content:'';position:absolute;inset:0;opacity:0.035;background-image:url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0v60M0 30h60' stroke='%23000' stroke-width='0.5'/%3E%3C/svg%3E")}
-.vc .vi{font-size:36px;margin-bottom:10px}
-.vc .vl{font-family:var(--serif);font-size:32px;font-weight:600;letter-spacing:1px;margin-bottom:8px}
-.vc .vd{font-size:14px;line-height:1.7;max-width:480px;margin:0 auto;opacity:0.75}
+.vc .vi{font-size:36px;margin-bottom:10px}.vc .vl{font-family:var(--serif);font-size:32px;font-weight:600;letter-spacing:1px;margin-bottom:8px}.vc .vd{font-size:14px;line-height:1.7;max-width:480px;margin:0 auto;opacity:0.75}
 .vg{background:var(--green3);border:1.5px solid rgba(45,106,79,0.15)}.vg .vl,.vg .vd{color:var(--green)}
 .vr{background:var(--red3);border:1.5px solid rgba(155,34,38,0.15)}.vr .vl,.vr .vd{color:var(--red)}
 .va{background:var(--amber3);border:1.5px solid rgba(184,134,11,0.15)}.va .vl,.va .vd{color:var(--amber)}
 .vb{background:var(--blue3);border:1.5px solid rgba(29,78,137,0.15)}.vb .vl,.vb .vd{color:var(--blue)}
 .mg{display:grid;grid-template-columns:120px 1fr;gap:16px;margin-bottom:28px}
-.rc{background:purple;border:1px solid var(--bg3);border-radius:12px;display:flex;align-items:center;justify-content:center;padding:20px}
-.sc{background:purple;border:1px solid var(--bg3);border-radius:12px;padding:20px;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.rc{background:white;border:1px solid var(--bg3);border-radius:12px;display:flex;align-items:center;justify-content:center;padding:20px}
+.sc{background:white;border:1px solid var(--bg3);border-radius:12px;padding:20px;display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .st .lb{font-family:var(--mono);font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink4);margin-bottom:5px}
 .st .vv{font-family:var(--mono);font-size:20px;font-weight:500;color:var(--ink)}
 .st .su{font-size:10px;color:var(--ink5);margin-top:3px}
-.bc{background:purple;border:1px solid var(--bg3);border-radius:12px;padding:20px;margin-bottom:28px}
+.bc{background:white;border:1px solid var(--bg3);border-radius:12px;padding:20px;margin-bottom:28px}
 .bl{font-family:var(--mono);font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink4);margin-bottom:14px}
 .bt{height:36px;background:var(--bg2);border-radius:6px;position:relative;overflow:hidden}
-.bz{position:absolute;height:100%}
-.bm{position:absolute;top:0;height:100%;width:2.5px;border-radius:2px;z-index:2}
-.bg{display:flex;justify-content:space-between;font-family:var(--mono);font-size:9.5px;color:var(--ink5);margin-top:8px}
+.bz{position:absolute;height:100%}.bm{position:absolute;top:0;height:100%;width:2.5px;border-radius:2px;z-index:2}
+.bgx{display:flex;justify-content:space-between;font-family:var(--mono);font-size:9.5px;color:var(--ink5);margin-top:8px}
 .ig{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:28px}
-.icc{background:purple;border:1px solid var(--bg3);border-radius:12px;padding:18px}
+.icc{background:white;border:1px solid var(--bg3);border-radius:12px;padding:18px}
 .icc .ih{font-family:var(--mono);font-size:9px;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:12px;font-weight:600}
-.icc .ii{font-size:12.5px;color:var(--ink2);line-height:1.6;padding:8px 0 8px 14px;border-left:2px solid var(--bg3)}
-.icc .ii+.ii{margin-top:4px}
+.icc .ii{font-size:12.5px;color:var(--ink2);line-height:1.6;padding:8px 0 8px 14px;border-left:2px solid var(--bg3)}.icc .ii+.ii{margin-top:4px}
 .icc.wn .ih{color:var(--amber2)}.icc.wn .ii{border-color:var(--gold3)}
 .icc.ak .ih{color:var(--ink3)}
 .dr{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:28px}
-.db{background:purple;border:1px solid var(--bg3);border-radius:12px;padding:16px 18px}
+.db{background:white;border:1px solid var(--bg3);border-radius:12px;padding:16px 18px}
 .db .dt{font-family:var(--mono);font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink4);margin-bottom:6px}
 .db .dd{font-size:12.5px;color:var(--ink2);line-height:1.6}
-.hi{background:purple;border:1px solid var(--bg3);border-radius:10px;padding:16px 18px;margin-bottom:8px;cursor:pointer;transition:all 0.25s var(--ease);display:flex;align-items:center;justify-content:space-between}
+/* Share buttons */
+.share-row{display:flex;gap:10px;margin-bottom:28px}
+.share-btn{flex:1;padding:12px;border-radius:10px;border:none;font-size:13px;font-weight:500;cursor:pointer;transition:all 0.25s var(--ease);display:flex;align-items:center;justify-content:center;gap:8px}
+.share-btn:hover{transform:translateY(-1px)}
+.share-wa{background:#25D366;color:white}.share-wa:hover{box-shadow:0 4px 16px rgba(37,211,102,0.3)}
+.share-copy{background:white;color:var(--ink2);border:1.5px solid var(--bg3) !important}.share-copy:hover{border-color:var(--gold3) !important}
+.share-x{background:#000;color:white}.share-x:hover{box-shadow:0 4px 16px rgba(0,0,0,0.2)}
+/* Compare mode */
+.cmp-banner{background:white;border:1px solid var(--bg3);border-radius:10px;padding:14px 18px;margin-bottom:28px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.cmp-banner .txt{font-size:13px;color:var(--ink3)}
+.cmp-banner .txt b{color:var(--ink);font-weight:600}
+.cmp-btn{padding:8px 16px;border-radius:8px;border:1.5px solid var(--gold3);background:var(--gold4);color:var(--ink);font-size:12px;font-weight:500;cursor:pointer;transition:all 0.2s}
+.cmp-btn:hover{background:var(--gold3)}
+/* Compare table */
+.cmp-table{width:100%;border-collapse:collapse;font-size:12.5px;margin-bottom:28px}
+.cmp-table th{font-family:var(--mono);font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink4);padding:10px 14px;text-align:left;border-bottom:1.5px solid var(--bg3);font-weight:500}
+.cmp-table td{padding:12px 14px;border-bottom:1px solid var(--bg2);color:var(--ink2);vertical-align:top}
+.cmp-table .nm{font-weight:500;color:var(--ink)}
+.cmp-table .num{font-family:var(--mono);font-weight:500}
+.cmp-table .badge{font-size:10px;font-weight:600;padding:3px 8px;border-radius:5px;display:inline-block}
+.cmp-table tr:hover td{background:var(--bg2)}
+.cmp-table .rm{color:var(--red2);cursor:pointer;font-size:11px;opacity:0.5;transition:opacity 0.2s}
+.cmp-table .rm:hover{opacity:1}
+/* Risk meter */
+.risk-meter{display:flex;align-items:center;gap:12px;padding:14px 18px;background:white;border:1px solid var(--bg3);border-radius:10px;margin-bottom:16px}
+.risk-meter .label{font-family:var(--mono);font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink4);white-space:nowrap}
+.risk-meter .track{flex:1;height:8px;background:var(--bg2);border-radius:4px;position:relative;overflow:hidden}
+.risk-meter .fill{height:100%;border-radius:4px;transition:width 0.8s var(--ease)}
+.risk-meter .val{font-family:var(--mono);font-size:14px;font-weight:500;min-width:40px;text-align:right}
+/* Advisor field note */
+.adv-note{font-size:11px;color:var(--ink4);margin-top:6px;font-style:italic;line-height:1.5}
+/* History */
+.hi{background:white;border:1px solid var(--bg3);border-radius:10px;padding:16px 18px;margin-bottom:8px;cursor:pointer;transition:all 0.25s var(--ease);display:flex;align-items:center;justify-content:space-between}
 .hi:hover{border-color:var(--gold3);transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,0.04)}
 .hl{display:flex;align-items:center;gap:12px}
 .hic{width:36px;height:36px;background:var(--bg2);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px}
 .hn{font-size:13.5px;font-weight:500;color:var(--ink)}
 .hm{font-family:var(--mono);font-size:11px;color:var(--ink4);margin-top:2px}
 .hb{font-size:10.5px;font-weight:600;padding:4px 10px;border-radius:6px}
-.lc{background:purple;border:1px solid var(--bg3);border-radius:12px;padding:20px 22px;margin-bottom:10px;transition:border-color 0.25s}
+.ha{display:flex;align-items:center;gap:8px}
+.hi-cmp{width:28px;height:28px;border-radius:6px;border:1.5px solid var(--bg3);background:white;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:12px;transition:all 0.2s;flex-shrink:0}
+.hi-cmp:hover{border-color:var(--gold3);background:var(--gold4)}
+.hi-cmp.on{border-color:var(--gold);background:var(--gold4)}
+/* Learn */
+.lc{background:white;border:1px solid var(--bg3);border-radius:12px;padding:20px 22px;margin-bottom:10px;transition:border-color 0.25s}
 .lc:hover{border-color:var(--gold3)}
 .lc .lt{font-family:var(--serif);font-size:17px;font-weight:600;color:var(--ink);margin-bottom:6px}
-.lc .lb{font-size:13px;color:var(--ink3);line-height:1.75}
+.lc .lbb{font-size:13px;color:var(--ink3);line-height:1.75}
 .rt{width:100%;border-collapse:collapse;font-size:12px}
 .rt th{font-family:var(--mono);font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink4);padding:10px 12px;text-align:left;border-bottom:1.5px solid var(--bg3);font-weight:500}
 .rt td{padding:10px 12px;border-bottom:1px solid var(--bg2);color:var(--ink2)}
@@ -115,8 +150,8 @@ body::before{content:'';position:fixed;inset:0;opacity:0.02;pointer-events:none;
 .ft{margin-top:48px;padding-top:24px;border-top:1px solid var(--bg3);text-align:center}
 .ft p{font-size:11px;color:var(--ink5);line-height:1.7}
 .ft .sg{font-family:var(--mono);font-size:9px;color:var(--ink5);margin-top:8px;letter-spacing:2px;text-transform:uppercase}
-.em{text-align:center;padding:48px 20px}
-@media(max-width:640px){.pgrid,.mg,.ig,.dr,.fr,.sc{grid-template-columns:1fr !important}.topbar{flex-direction:column;align-items:flex-start;gap:16px}.wrap{padding:20px 16px 60px}}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--ink);color:var(--gold2);padding:10px 20px;border-radius:8px;font-size:13px;font-weight:500;z-index:100;animation:slideUp 0.3s var(--ease);pointer-events:none}
+@media(max-width:640px){.pgrid,.mg,.ig,.dr,.fr,.sc{grid-template-columns:1fr !important}.topbar{flex-direction:column;align-items:flex-start;gap:16px}.wrap{padding:20px 16px 60px}.share-row{flex-direction:column}}
 </style>
 </head>
 <body>
@@ -124,21 +159,34 @@ body::before{content:'';position:fixed;inset:0;opacity:0.02;pointer-events:none;
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js"></script>
 <script>
-var h=React.createElement,us=React.useState;
-var BM={equity_mf:{l:"Equity Mutual Fund",i:"\u{1F4CA}",r:[10,13,16],f:20,k:"None (open-ended) / 3yr ELSS",t:"LTCG >\u20B91.25L at 12.5% after 1yr; STCG at 20%",q:["Rolling 5-year return vs benchmark?","Expense ratio and exit load?","Pre-tax or post-tax figure?"]},debt_mf:{l:"Debt Mutual Fund",i:"\u{1F3E6}",r:[6,7.5,9],f:11,k:"None (open-ended)",t:"Taxed at slab rate (no indexation post Apr 2023)",q:["Portfolio credit quality (AAA vs AA)?","Modified duration vs rate view?","Is YTM sustainable or cyclical peak?"]},pms:{l:"PMS",i:"\u{1F4BC}",r:[12,16,22],f:28,k:"1-3 years typical",t:"Taxed at individual security level",q:["Gross or net of fees (2%+ fixed + 20% perf)?","Max drawdown in 2020/2022?","Benchmark: Nifty 50 or Nifty 500?"]},aif_cat2:{l:"AIF Category II",i:"\u{1F3DB}\uFE0F",r:[12,15,20],f:25,k:"3-5 years (closed-ended)",t:"Pass-through taxation at investor level",q:["Gross or net IRR after 2/20 structure?","Deployment pace and vintage?","Audited return or back-tested projection?"]},aif_cat3:{l:"AIF Category III",i:"\u26A1",r:[10,14,20],f:30,k:"1-3 years",t:"Fund-level taxation at ~42% max marginal rate",q:["Sharpe ratio and max drawdown?","Strategy capacity-constrained?","Fund-level tax drag on net returns?"]},reit_invit:{l:"REIT / InvIT",i:"\u{1F3E2}",r:[8,12,16],f:20,k:"None (listed, liquid)",t:"Interest at slab; dividend exempt; amortization reduces cost basis",q:["Yield-only or total return with NAV growth?","WALE and occupancy trend?","Sponsor asset injection at fair value?"]},fd_bonds:{l:"FD / Bonds / NCDs",i:"\u{1F512}",r:[6.5,7.5,9],f:11,k:"Varies: 1-10 years",t:"Interest at slab rate; select 54EC bonds exempt",q:["Issuer credit rating?","Pre-tax or post-tax?","Call/put options affecting tenure?"]},mld:{l:"Market Linked Debenture",i:"\u{1F517}",r:[8,10,13],f:16,k:"2-5 years",t:"Listed: LTCG 12.5% after 1yr; Unlisted: slab",q:["Underlying index or strategy?","Principal protected or at-risk?","Issuer credit quality?"]},real_estate:{l:"Direct Real Estate",i:"\u{1F3E0}",r:[8,12,18],f:22,k:"3-7+ years (illiquid)",t:"LTCG 12.5% after 2yr (no indexation from Jul 2024)",q:["Rental yield + appreciation or just appreciation?","Realistic exit timeline?","Registration, maintenance, vacancy factored in?"]},sm_reit:{l:"SM REIT (Fractional)",i:"\u{1F9E9}",r:[7,9,13],f:16,k:"3-5yr typical",t:"Similar to REIT; verify scheme-specific treatment",q:["SEBI-registered or unregulated platform?","Property occupancy and lease tenure?","Total fees incl. setup and management?"]}};
+var h=React.createElement,us=React.useState,ue=React.useEffect;
+var BM={equity_mf:{l:"Equity Mutual Fund",i:"\u{1F4CA}",r:[10,13,16],f:20,k:"None / 3yr ELSS",t:"LTCG >\u20B91.25L at 12.5% after 1yr; STCG 20%",q:["Rolling 5-year return vs benchmark?","Expense ratio and exit load?","Pre-tax or post-tax figure?"]},debt_mf:{l:"Debt Mutual Fund",i:"\u{1F3E6}",r:[6,7.5,9],f:11,k:"None (open-ended)",t:"Slab rate (no indexation post Apr 2023)",q:["Credit quality (AAA vs AA)?","Modified duration vs rate view?","YTM sustainable or cyclical peak?"]},pms:{l:"PMS",i:"\u{1F4BC}",r:[12,16,22],f:28,k:"1-3 years",t:"Taxed at security level",q:["Gross or net of fees (2%+ fixed + 20% perf)?","Max drawdown in 2020/2022?","Benchmark: Nifty 50 or 500?"]},aif_cat2:{l:"AIF Category II",i:"\u{1F3DB}\uFE0F",r:[12,15,20],f:25,k:"3-5yr closed-ended",t:"Pass-through at investor level",q:["Gross or net IRR after 2/20?","Deployment pace and vintage?","Audited or back-tested?"]},aif_cat3:{l:"AIF Category III",i:"\u26A1",r:[10,14,20],f:30,k:"1-3 years",t:"Fund-level tax at ~42%",q:["Sharpe ratio and max drawdown?","Capacity-constrained?","Tax drag on net returns?"]},reit_invit:{l:"REIT / InvIT",i:"\u{1F3E2}",r:[8,12,16],f:20,k:"Listed, liquid",t:"Interest at slab; dividend exempt; amortization reduces cost basis",q:["Yield-only or total return?","WALE and occupancy trend?","Asset injection at fair value?"]},fd_bonds:{l:"FD / Bonds / NCDs",i:"\u{1F512}",r:[6.5,7.5,9],f:11,k:"1-10 years",t:"Interest at slab; 54EC exempt",q:["Issuer credit rating?","Pre-tax or post-tax?","Call/put options?"]},mld:{l:"Market Linked Debenture",i:"\u{1F517}",r:[8,10,13],f:16,k:"2-5 years",t:"Listed: LTCG 12.5%; Unlisted: slab",q:["Underlying strategy?","Principal protected?","Issuer quality?"]},real_estate:{l:"Direct Real Estate",i:"\u{1F3E0}",r:[8,12,18],f:22,k:"3-7+ years",t:"LTCG 12.5% after 2yr",q:["Yield + appreciation or just appreciation?","Realistic exit timeline?","All costs factored in?"]},sm_reit:{l:"SM REIT (Fractional)",i:"\u{1F9E9}",r:[7,9,13],f:16,k:"3-5 years",t:"Similar to REIT",q:["SEBI-registered?","Occupancy and lease tenure?","Total fees?"]}};
 var R=7.1;
 var VC={"RED FLAG":{c:"vr",i:"\u{1F6A9}",x:"#9b2226",b:"background:#fce8e6;color:#9b2226"},"AGGRESSIVE":{c:"va",i:"\u26A0\uFE0F",x:"#7c4a03",b:"background:#fef3dc;color:#7c4a03"},"REALISTIC":{c:"vg",i:"\u2713",x:"#2d6a4f",b:"background:#e8f3ed;color:#2d6a4f"},"CONSERVATIVE":{c:"vb",i:"\u{1F6E1}\uFE0F",x:"#1d4e89",b:"background:#e6f0fa;color:#1d4e89"},"BELOW TYPICAL":{c:"vb",i:"\u{1F4C9}",x:"#1d4e89",b:"background:#e6f0fa;color:#1d4e89"},"INVALID":{c:"va",i:"\u2014",x:"#6b6358",b:"background:#f3efe8;color:#6b6358"}};
 
-function calc(tp,pr,ty){var b=BM[tp];if(!b)return null;var lo=b.r[0],mi=b.r[1],hi=b.r[2],sp=pr-R,v,s,ex,rf=[];
-if(pr<=0){v="INVALID";s=0;ex="A zero or negative return is not meaningful for this instrument.";}
-else if(pr>=b.f){v="RED FLAG";s=Math.max(5,20-(pr-b.f)*3);ex="At "+pr+"%, this significantly exceeds what "+b.l+" instruments have historically delivered. Returns at this level typically signal hidden risk, misleading projections, or misrepresentation.";rf.push("Exceeds historical best-case performance","Likely cherry-picked or back-tested data","Potential undisclosed leverage or concentration risk");}
-else if(pr>hi){v="AGGRESSIVE";s=Math.max(25,50-(pr-hi)*5);ex=pr+"% sits above the realistic ceiling of "+hi+"% for "+b.l+". While achievable in strong bull markets, this is not a sustainable long-term expectation.";rf.push("Requires persistently favorable conditions","Likely quoted gross of fees and taxes");}
-else if(pr>=mi){v="REALISTIC";s=Math.min(90,70+(hi-pr)*3);ex=pr+"% falls squarely within the achievable range for "+b.l+". A reasonable expectation given competent management and normal market conditions.";}
-else if(pr>=lo){v="CONSERVATIVE";s=85;ex=pr+"% represents a conservative but honest expectation for "+b.l+". An advisor quoting this is likely being transparent.";}
-else{v="BELOW TYPICAL";s=60;ex=pr+"% falls below the typical range for "+b.l+". Ensure excessive fees are not eroding otherwise normal returns.";rf.push("Potential high fee drag suppressing returns");}
-if(ty<3&&tp!=="fd_bonds"&&tp!=="debt_mf"){rf.push("Short horizon amplifies sequence-of-return risk");s=Math.max(10,s-10);}
+function calc(tp,pr,ty,rl){var b=BM[tp];if(!b)return null;var lo=b.r[0],mi=b.r[1],hi=b.r[2],sp=pr-R,v,s,ex,rf=[];
+if(pr<=0){v="INVALID";s=0;ex="A zero or negative return is not meaningful.";}
+else if(pr>=b.f){v="RED FLAG";s=Math.max(5,20-(pr-b.f)*3);ex="At "+pr+"%, this significantly exceeds what "+b.l+" instruments have historically delivered. Typically signals hidden risk or misrepresentation.";rf.push("Exceeds historical best-case","Likely cherry-picked data","Potential undisclosed leverage");}
+else if(pr>hi){v="AGGRESSIVE";s=Math.max(25,50-(pr-hi)*5);ex=pr+"% exceeds the realistic ceiling of "+hi+"% for "+b.l+". Achievable in bull markets, not sustainable long-term.";rf.push("Requires favorable conditions","Likely gross of fees/taxes");}
+else if(pr>=mi){v="REALISTIC";s=Math.min(90,70+(hi-pr)*3);ex=pr+"% is within the achievable range for "+b.l+". Reasonable with competent management.";}
+else if(pr>=lo){v="CONSERVATIVE";s=85;ex=pr+"% is conservative but honest for "+b.l+". Your advisor is likely being transparent.";}
+else{v="BELOW TYPICAL";s=60;ex=pr+"% is below typical for "+b.l+". Check if fees are eroding returns.";rf.push("Potential high fee drag");}
+if(ty<3&&tp!=="fd_bonds"&&tp!=="debt_mf"){rf.push("Short horizon amplifies risk");s=Math.max(10,s-10);}
+if(rl==="conservative"&&(v==="AGGRESSIVE"||v==="RED FLAG")){rf.push("Misaligned with your conservative risk profile");s=Math.max(5,s-8);}
+if(rl==="aggressive"&&v==="BELOW TYPICAL"){rf.push("Underperforms for an aggressive risk appetite");}
 var tm=tp==="aif_cat3"?0.57:(tp==="debt_mf"||tp==="fd_bonds")?0.7:0.875;
-return{v:v,s:s,ex:ex,rf:rf,lo:lo,mi:mi,hi:hi,red:b.f,sp:sp,pt:Math.round(pr*tm*100)/100,tn:b.t,lk:b.k,qs:b.q,pr:pr,tp:tp};}
+var risk=Math.min(100,Math.max(0,Math.round((pr/b.f)*100)));
+return{v:v,s:s,ex:ex,rf:rf,lo:lo,mi:mi,hi:hi,red:b.f,sp:sp,pt:Math.round(pr*tm*100)/100,tn:b.t,lk:b.k,qs:b.q,pr:pr,tp:tp,risk:risk};}
+
+function genReport(rs){
+var b=BM[rs.tp]||{};
+var lines=["*Return Validator Report*","","Product: "+b.l+(rs.ad?" | Advisor: "+rs.ad:""),"Promised: "+rs.pr+"% p.a. | Horizon: "+rs.ty+"yr","","*Verdict: "+rs.v+"*","Score: "+rs.s+"/100","",""+rs.ex,"","Post-tax estimate: ~"+rs.pt+"%","G-Sec spread: "+(rs.sp>0?"+":"")+rs.sp.toFixed(1)+"% over "+R+"%","Benchmark range: "+rs.lo+"-"+rs.hi+"%"];
+if(rs.rf.length){lines.push("");lines.push("*Risk Factors:*");rs.rf.forEach(function(r){lines.push("- "+r)});}
+lines.push("");lines.push("*Ask Your Advisor:*");rs.qs.forEach(function(q){lines.push("- "+q)});
+lines.push("");lines.push("Tax: "+rs.tn);lines.push("Lock-in: "+rs.lk);
+lines.push("");lines.push("_Validated at returncheck.netlify.app_");
+return lines.join("\n");
+}
 
 function App(){
 var _v=us("input"),vw=_v[0],sv=_v[1];
@@ -146,40 +194,122 @@ var _f=us({tp:"",pr:"",ty:"3",rl:"moderate",ad:""}),fm=_f[0],sf=_f[1];
 var _r=us(null),rs=_r[0],sr=_r[1];
 var _h=us([]),ht=_h[0],sh=_h[1];
 var _a=us(0),an=_a[0],sa=_a[1];
+var _t=us(""),toast=_t[0],sToast=_t[1];
+var _cmp=us([]),cmpList=_cmp[0],sCmp=_cmp[1];
+var _cv=us(false),cmpView=_cv[0],sCmpView=_cv[1];
+
 function uf(k,v){sf(function(f){var n={};for(var x in f)n[x]=f[x];n[k]=v;return n});}
-function go(){if(!fm.tp||!fm.pr)return;var r=calc(fm.tp,parseFloat(fm.pr),parseInt(fm.ty)||3);if(!r)return;r.ad=fm.ad;r.ty=fm.ty;r.id=Date.now();sr(r);sh(function(p){return[r].concat(p).slice(0,50)});sv("result");sa(0);setTimeout(function(){sa(1)},150);setTimeout(function(){sa(2)},650);setTimeout(function(){sa(3)},1150);}
-function re(){sf({tp:"",pr:"",ty:"3",rl:"moderate",ad:""});sr(null);sv("input");}
+function showToast(msg){sToast(msg);setTimeout(function(){sToast("")},2000);}
+
+function go(){if(!fm.tp||!fm.pr)return;var r=calc(fm.tp,parseFloat(fm.pr),parseInt(fm.ty)||3,fm.rl);if(!r)return;r.ad=fm.ad;r.ty=fm.ty;r.rl=fm.rl;r.id=Date.now();sr(r);sh(function(p){return[r].concat(p).slice(0,50)});sv("result");sa(0);setTimeout(function(){sa(1)},150);setTimeout(function(){sa(2)},650);setTimeout(function(){sa(3)},1150);}
+function re(){sf({tp:"",pr:"",ty:"3",rl:"moderate",ad:""});sr(null);sv("input");sCmpView(false);}
+
+function shareWA(){if(!rs)return;var txt=genReport(rs);var url="https://wa.me/?text="+encodeURIComponent(txt);window.open(url,"_blank");}
+function shareX(){if(!rs)return;var b=BM[rs.tp]||{};var txt="I just validated a "+rs.pr+"% return claim on "+b.l+" \u2014 verdict: "+rs.v+" ("+rs.s+"/100)\n\nCheck your advisor's promises at returncheck.netlify.app";window.open("https://twitter.com/intent/tweet?text="+encodeURIComponent(txt),"_blank");}
+function copyReport(){if(!rs)return;var txt=genReport(rs);navigator.clipboard.writeText(txt).then(function(){showToast("Report copied to clipboard")}).catch(function(){showToast("Could not copy")});}
+
+function toggleCmp(item){sCmp(function(prev){var exists=prev.some(function(c){return c.id===item.id});if(exists)return prev.filter(function(c){return c.id!==item.id});if(prev.length>=4)return prev;return prev.concat([item])});}
+
 var sb=BM[fm.tp],vc=rs?(VC[rs.v]||{}):{};
 
 return h("div",{className:"wrap"},
-h("div",{className:"topbar"},h("div",{className:"logo"},h("div",{className:"logo-mark"},"V"),h("div",null,h("h1",null,"Return Validator"),h("p",null,"Investment Return Analysis"))),h("div",{className:"nav"},h("button",{className:vw==="input"||vw==="result"?"on":"",onClick:re},"Validate"),h("button",{className:vw==="history"?"on":"",onClick:function(){sv("history")}},"History"),h("button",{className:vw==="learn"?"on":"",onClick:function(){sv("learn")}},"Learn"))),
-h("div",{className:"rfr"},h("span",{className:"r"},"10Y G-Sec "+R+"%"),h("span",{className:"d"},"The sovereign risk-free rate. Every basis point above must be earned through additional risk.")),
+toast&&h("div",{className:"toast"},toast),
 
+h("div",{className:"topbar"},h("div",{className:"logo"},h("div",{className:"logo-mark"},"V"),h("div",null,h("h1",null,"Return Validator"),h("p",null,"Investment Return Analysis"))),h("div",{className:"nav"},h("button",{className:vw==="input"||vw==="result"?"on":"",onClick:re},"Validate"),h("button",{className:vw==="history"?"on":"",onClick:function(){sv("history");sCmpView(false)}},"History"),h("button",{className:vw==="compare"?"on":"",onClick:function(){sv("compare")}},"Compare"+(cmpList.length?" ("+cmpList.length+")":"")),h("button",{className:vw==="learn"?"on":"",onClick:function(){sv("learn")}},"Learn"))),
+h("div",{className:"rfr"},h("span",{className:"r"},"10Y G-Sec "+R+"%"),h("span",{className:"d"},"The sovereign risk-free rate. Every basis point above must compensate for risk.")),
+
+// INPUT
 vw==="input"&&h("div",{style:{animation:"enter 0.6s var(--ease) both"}},
 h("div",{style:{marginBottom:32}},h("div",{className:"sl"},h("em",null,"i")," Product Type"),h("div",{className:"pgrid"},Object.keys(BM).map(function(k){var b=BM[k];return h("button",{key:k,className:"pb"+(fm.tp===k?" sel":""),onClick:function(){uf("tp",k)}},h("div",{className:"ic"},b.i),h("div",null,h("div",{className:"nm"},b.l),h("div",{className:"rg"},b.r[0]+"\u2013"+b.r[2]+"% p.a.")))}))),
 h("div",{style:{marginBottom:28}},h("div",{className:"sl"},h("em",null,"ii")," Return Details"),h("div",{className:"fr"},h("div",{className:"fi"},h("label",null,"Promised Return (% p.a.)"),h("input",{type:"number",step:"0.1",min:"0",max:"100",placeholder:"e.g. 15",value:fm.pr,onChange:function(e){uf("pr",e.target.value)}})),h("div",{className:"fi"},h("label",null,"Investment Horizon"),h("select",{value:fm.ty,onChange:function(e){uf("ty",e.target.value)}},[1,2,3,5,7,10,15].map(function(y){return h("option",{key:y,value:y},y+" year"+(y>1?"s":""))}))))),
-h("div",{style:{marginBottom:28}},h("div",{className:"sl"},h("em",null,"iii")," Risk Appetite"),h("div",{className:"chips"},["conservative","moderate","aggressive"].map(function(r){return h("button",{key:r,className:"ch"+(fm.rl===r?" on":""),onClick:function(){uf("rl",r)}},r.charAt(0).toUpperCase()+r.slice(1))}))),
+h("div",{style:{marginBottom:28}},h("div",{className:"sl"},h("em",null,"iii")," Risk Appetite"),h("div",{className:"chips"},["conservative","moderate","aggressive"].map(function(r){return h("button",{key:r,className:"ch"+(fm.rl===r?" on":""),onClick:function(){uf("rl",r)}},r.charAt(0).toUpperCase()+r.slice(1))})),h("div",{className:"adv-note"},"Your risk profile now influences the verdict \u2014 a 20% return flagged differently for conservative vs aggressive investors.")),
 h("div",{style:{marginBottom:28}},h("div",{className:"sl"},h("em",null,"iv")," Advisor ",h("span",{style:{fontFamily:"var(--sans)",fontSize:10,color:"var(--ink5)",fontStyle:"normal",letterSpacing:0}},"optional")),h("div",{className:"fi"},h("input",{type:"text",placeholder:"e.g. 360 ONE, IIFL Wealth, Edelweiss...",value:fm.ad,onChange:function(e){uf("ad",e.target.value)}}))),
-sb&&h("div",{className:"ctx"},h("div",{className:"hd"},sb.l+" \u2014 Benchmark Context"),h("div",{className:"bd"},"Realistic range: ",h("b",null,sb.r[0]+"% \u2013 "+sb.r[2]+"% p.a.")," \u00B7 Lock-in: "+sb.k),h("div",{className:"tx"},sb.t)),
+sb&&h("div",{className:"ctx"},h("div",{className:"hd"},sb.l+" \u2014 Benchmark"),h("div",{className:"bd"},"Range: ",h("b",null,sb.r[0]+"% \u2013 "+sb.r[2]+"% p.a.")," \u00B7 Lock-in: "+sb.k),h("div",{className:"tx"},sb.t)),
 h("button",{className:"go",disabled:!fm.tp||!fm.pr,onClick:go},"Validate This Return")),
 
+// RESULT
 vw==="result"&&rs&&h("div",null,
 h("div",{className:"vc "+(vc.c||""),style:{animation:an>=1?"slideUp 0.7s var(--ease) both":"none",opacity:an>=1?1:0}},h("div",{className:"vi"},vc.i||""),h("div",{className:"vl"},rs.v),h("div",{className:"vd"},rs.ex)),
+
+// Risk meter
+h("div",{className:"risk-meter",style:{animation:an>=1?"slideUp 0.6s var(--ease) 0.1s both":"none",opacity:an>=1?1:0}},
+h("span",{className:"label"},"Risk Level"),
+h("div",{className:"track"},h("div",{className:"fill",style:{width:rs.risk+"%",background:rs.risk>75?"var(--red2)":rs.risk>50?"var(--amber2)":rs.risk>25?"var(--gold)":"var(--green2)"}})),
+h("span",{className:"val",style:{color:rs.risk>75?"var(--red)":rs.risk>50?"var(--amber)":"var(--green)"}},rs.risk+"%")),
+
+// Share buttons
+h("div",{className:"share-row",style:{animation:an>=1?"slideUp 0.6s var(--ease) 0.2s both":"none",opacity:an>=1?1:0}},
+h("button",{className:"share-btn share-wa",onClick:shareWA},"\u{1F4F1} Share on WhatsApp"),
+h("button",{className:"share-btn share-x",onClick:shareX},"\ud835\udd4f Post"),
+h("button",{className:"share-btn share-copy",onClick:copyReport},"\u{1F4CB} Copy Report")),
+
 h("div",{className:"mg",style:{animation:an>=2?"slideUp 0.6s var(--ease) both":"none",opacity:an>=2?1:0}},
 h("div",{className:"rc"},h("div",{style:{position:"relative",width:88,height:88}},h("svg",{width:88,height:88,viewBox:"0 0 100 100"},h("circle",{cx:50,cy:50,r:45,fill:"none",stroke:"#ebe6dc",strokeWidth:5}),h("circle",{cx:50,cy:50,r:45,fill:"none",stroke:vc.x||"#b8943e",strokeWidth:5,strokeLinecap:"round",strokeDasharray:"283",strokeDashoffset:283-(283*rs.s/100),transform:"rotate(-90 50 50)",style:{transition:"stroke-dashoffset 1.4s cubic-bezier(0.22,1,0.36,1)"}})),h("div",{style:{position:"absolute",inset:0,display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center"}},h("span",{style:{fontFamily:"var(--mono)",fontSize:26,fontWeight:500,color:"var(--ink)"}},rs.s),h("span",{style:{fontFamily:"var(--mono)",fontSize:8,color:"var(--ink4)",textTransform:"uppercase",letterSpacing:"1.5px",marginTop:2}},"SCORE")))),
 h("div",{className:"sc"},[{l:"PROMISED",v:rs.pr+"%",s:"gross p.a."},{l:"POST-TAX",v:"~"+rs.pt+"%",s:"effective"},{l:"G-SEC SPREAD",v:(rs.sp>0?"+":"")+rs.sp.toFixed(1)+"%",s:"over "+R+"% RFR"},{l:"BENCHMARK",v:rs.lo+"\u2013"+rs.hi+"%",s:BM[rs.tp].l}].map(function(m,i){return h("div",{key:i,className:"st"},h("div",{className:"lb"},m.l),h("div",{className:"vv"},m.v),h("div",{className:"su"},m.s))}))),
-h("div",{className:"bc",style:{animation:an>=2?"slideUp 0.6s var(--ease) 0.1s both":"none",opacity:an>=2?1:0}},h("div",{className:"bl"},"Return Positioning"),h("div",{className:"bt"},h("div",{className:"bz",style:{left:0,width:(R/rs.red*100)+"%",background:"rgba(29,78,137,0.06)",borderRight:"1px dashed rgba(29,78,137,0.2)"}}),h("div",{className:"bz",style:{left:(rs.lo/rs.red*100)+"%",width:((rs.hi-rs.lo)/rs.red*100)+"%",background:"rgba(45,106,79,0.08)",borderLeft:"1px solid rgba(45,106,79,0.2)",borderRight:"1px solid rgba(45,106,79,0.2)"}}),h("div",{className:"bz",style:{right:0,width:"5%",background:"rgba(155,34,38,0.06)"}}),h("div",{className:"bm",style:{left:Math.min(95,rs.pr/rs.red*100)+"%",background:vc.x||"var(--gold)",boxShadow:"0 0 8px "+(vc.x||"#b8943e")+"33"}})),h("div",{className:"bg"},h("span",null,"0%"),h("span",null,"RFR "+R+"%"),h("span",null,rs.lo+"\u2013"+rs.hi+"%"),h("span",null,rs.red+"%+ Red Flag"))),
+
+h("div",{className:"bc",style:{animation:an>=2?"slideUp 0.6s var(--ease) 0.1s both":"none",opacity:an>=2?1:0}},h("div",{className:"bl"},"Return Positioning"),h("div",{className:"bt"},h("div",{className:"bz",style:{left:0,width:(R/rs.red*100)+"%",background:"rgba(29,78,137,0.06)",borderRight:"1px dashed rgba(29,78,137,0.2)"}}),h("div",{className:"bz",style:{left:(rs.lo/rs.red*100)+"%",width:((rs.hi-rs.lo)/rs.red*100)+"%",background:"rgba(45,106,79,0.08)",borderLeft:"1px solid rgba(45,106,79,0.2)",borderRight:"1px solid rgba(45,106,79,0.2)"}}),h("div",{className:"bz",style:{right:0,width:"5%",background:"rgba(155,34,38,0.06)"}}),h("div",{className:"bm",style:{left:Math.min(95,rs.pr/rs.red*100)+"%",background:vc.x||"var(--gold)",boxShadow:"0 0 8px "+(vc.x||"#b8943e")+"33"}})),h("div",{className:"bgx"},h("span",null,"0%"),h("span",null,"RFR "+R+"%"),h("span",null,rs.lo+"\u2013"+rs.hi+"%"),h("span",null,rs.red+"%+"))),
+
 h("div",{className:"ig",style:{animation:an>=3?"slideUp 0.6s var(--ease) both":"none",opacity:an>=3?1:0,gridTemplateColumns:rs.rf.length?"1fr 1fr":"1fr"}},rs.rf.length?h("div",{className:"icc wn"},h("div",{className:"ih"},"\u26A0 Risk Factors"),rs.rf.map(function(r,i){return h("div",{key:i,className:"ii"},r)})):null,h("div",{className:"icc ak"},h("div",{className:"ih"},"Questions for Your Advisor"),rs.qs.map(function(q,i){return h("div",{key:i,className:"ii"},q)}))),
-h("div",{className:"dr",style:{animation:an>=3?"slideUp 0.6s var(--ease) 0.1s both":"none",opacity:an>=3?1:0}},h("div",{className:"db"},h("div",{className:"dt"},"Tax Treatment"),h("div",{className:"dd"},rs.tn)),h("div",{className:"db"},h("div",{className:"dt"},"Typical Lock-in"),h("div",{className:"dd"},rs.lk))),
-h("button",{className:"bk",onClick:re},"\u2190  Validate Another Return")),
 
-vw==="history"&&h("div",{style:{animation:"enter 0.6s var(--ease) both"}},h("h2",{style:{fontFamily:"var(--serif)",fontSize:24,fontWeight:500,marginBottom:20}},"Validation History"),ht.length===0?h("div",{className:"em"},h("div",{style:{fontSize:28,marginBottom:12,opacity:0.4}},"\u{1F4CB}"),h("p",{style:{color:"var(--ink4)",fontSize:13}},"No validations recorded yet.")):ht.map(function(item){var b=BM[item.tp]||{};var v=VC[item.v]||{};return h("div",{key:item.id,className:"hi",onClick:function(){sr(item);sv("result");sa(3)}},h("div",{className:"hl"},h("div",{className:"hic"},b.i||""),h("div",null,h("div",{className:"hn"},b.l+(item.ad?" \u00B7 "+item.ad:"")),h("div",{className:"hm"},item.pr+"% \u00B7 "+item.ty+"yr"))),h("span",{className:"hb",style:{cssText:v.b||""}},item.v))})),
+h("div",{className:"dr",style:{animation:an>=3?"slideUp 0.6s var(--ease) 0.1s both":"none",opacity:an>=3?1:0}},h("div",{className:"db"},h("div",{className:"dt"},"Tax Treatment"),h("div",{className:"dd"},rs.tn)),h("div",{className:"db"},h("div",{className:"dt"},"Lock-in"),h("div",{className:"dd"},rs.lk))),
 
+h("div",{style:{display:"flex",gap:10}},
+h("button",{className:"bk",onClick:re,style:{flex:1}},"\u2190 Validate Another"),
+h("button",{className:"bk",onClick:function(){toggleCmp(rs);showToast("Added to compare")},style:{flex:1,borderColor:"var(--gold3)",background:"var(--gold4)",color:"var(--ink)"}},"+ Add to Compare"))),
+
+// HISTORY
+vw==="history"&&h("div",{style:{animation:"enter 0.6s var(--ease) both"}},
+h("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:20}},
+h("h2",{style:{fontFamily:"var(--serif)",fontSize:24,fontWeight:500}},"Validation History"),
+cmpList.length>=2&&h("button",{className:"cmp-btn",onClick:function(){sv("compare")}},"Compare "+cmpList.length+" items \u2192")),
+ht.length===0?h("div",{style:{textAlign:"center",padding:"48px 20px"}},h("div",{style:{fontSize:28,marginBottom:12,opacity:0.4}},"\u{1F4CB}"),h("p",{style:{color:"var(--ink4)",fontSize:13}},"No validations yet.")):
+ht.map(function(item){var b=BM[item.tp]||{};var v=VC[item.v]||{};var inCmp=cmpList.some(function(c){return c.id===item.id});
+return h("div",{key:item.id,className:"hi"},
+h("div",{className:"hl",style:{cursor:"pointer",flex:1},onClick:function(){sr(item);sv("result");sa(3)}},
+h("div",{className:"hic"},b.i||""),
+h("div",null,h("div",{className:"hn"},b.l+(item.ad?" \u00B7 "+item.ad:"")),h("div",{className:"hm"},item.pr+"% \u00B7 "+item.ty+"yr \u00B7 "+item.rl))),
+h("div",{className:"ha"},
+h("span",{className:"hb",style:{cssText:v.b||""}},item.v),
+h("div",{className:"hi-cmp"+(inCmp?" on":""),onClick:function(e){e.stopPropagation();toggleCmp(item)},title:"Add to compare"},inCmp?"\u2713":"+")))})),
+
+// COMPARE
+vw==="compare"&&h("div",{style:{animation:"enter 0.6s var(--ease) both"}},
+h("h2",{style:{fontFamily:"var(--serif)",fontSize:24,fontWeight:500,marginBottom:6}},"Side-by-Side Comparison"),
+h("p",{style:{fontSize:13,color:"var(--ink4)",marginBottom:24}},"Select items from History to compare up to 4 products."),
+cmpList.length<2?h("div",{style:{textAlign:"center",padding:"48px 20px"}},h("div",{style:{fontSize:28,marginBottom:12,opacity:0.4}},"\u2696\uFE0F"),h("p",{style:{color:"var(--ink4)",fontSize:13}},"Add at least 2 validations from History to compare."),h("button",{className:"bk",style:{maxWidth:200,margin:"16px auto"},onClick:function(){sv("history")}},"Go to History")):
+h("div",{style:{overflowX:"auto"}},
+h("table",{className:"cmp-table"},
+h("thead",null,h("tr",null,h("th",null,"Metric"),cmpList.map(function(c){var b=BM[c.tp]||{};return h("th",{key:c.id},b.i+" "+b.l,c.ad?h("div",{style:{fontFamily:"var(--sans)",fontWeight:400,fontSize:10,marginTop:2,textTransform:"none",letterSpacing:0}},c.ad):null)}))),
+h("tbody",null,
+[{l:"Promised Return",k:function(c){return c.pr+"%"}},
+{l:"Verdict",k:function(c){var v=VC[c.v]||{};return h("span",{className:"badge",style:{cssText:v.b||""}},c.v)}},
+{l:"Score",k:function(c){return h("span",{className:"num"},c.s+"/100")}},
+{l:"Post-Tax Est.",k:function(c){return"~"+c.pt+"%"}},
+{l:"G-Sec Spread",k:function(c){return(c.sp>0?"+":"")+c.sp.toFixed(1)+"%"}},
+{l:"Benchmark Range",k:function(c){return c.lo+"\u2013"+c.hi+"%"}},
+{l:"Risk Level",k:function(c){return h("div",{style:{display:"flex",alignItems:"center",gap:6}},h("div",{style:{width:40,height:6,background:"var(--bg2)",borderRadius:3,overflow:"hidden"}},h("div",{style:{width:c.risk+"%",height:"100%",borderRadius:3,background:c.risk>75?"var(--red2)":c.risk>50?"var(--amber2)":"var(--green2)"}})),h("span",{className:"num",style:{fontSize:11}},c.risk+"%"))}},
+{l:"Horizon",k:function(c){return c.ty+" yr"}},
+{l:"Risk Appetite",k:function(c){return c.rl}},
+{l:"Tax",k:function(c){return c.tn}},
+{l:"Lock-in",k:function(c){return c.lk}},
+{l:"",k:function(c){return h("span",{className:"rm",onClick:function(){sCmp(function(p){return p.filter(function(x){return x.id!==c.id})})}},"\u2715 Remove")}}
+].map(function(row,i){
+return h("tr",{key:i},h("td",{style:{fontFamily:"var(--mono)",fontSize:10,letterSpacing:"1px",textTransform:"uppercase",color:"var(--ink4)",fontWeight:500}},row.l),cmpList.map(function(c){return h("td",{key:c.id},row.k(c))}))}))),
+h("div",{style:{marginTop:20,display:"flex",gap:10}},
+h("button",{className:"bk",style:{flex:1},onClick:function(){sv("history")}},"\u2190 Back to History"),
+h("button",{className:"bk",style:{flex:1},onClick:function(){
+var txt="*Return Validator \u2014 Comparison*\n\n";
+cmpList.forEach(function(c){var b=BM[c.tp]||{};txt+=b.l+(c.ad?" ("+c.ad+")":"")+": "+c.pr+"% \u2192 "+c.v+" ("+c.s+"/100) | Post-tax ~"+c.pt+"%\n"});
+txt+="\n_Compare at returncheck.netlify.app_";
+window.open("https://wa.me/?text="+encodeURIComponent(txt),"_blank");
+}},"\u{1F4F1} Share Comparison")))),
+
+// LEARN
 vw==="learn"&&h("div",{style:{animation:"enter 0.6s var(--ease) both"}},h("h2",{style:{fontFamily:"var(--serif)",fontSize:24,fontWeight:500,marginBottom:4}},"Return Literacy"),h("p",{style:{fontSize:13,color:"var(--ink4)",marginBottom:28}},"Essential frameworks for evaluating return claims."),
-[{t:"Gross vs Net Returns",c:"Advisors routinely quote gross returns. A PMS charging 2% fixed + 20% performance fee on a 20% gross return delivers approximately 14.4% net. Always ask: before or after all fees?"},{t:"Pre-Tax vs Post-Tax",c:"A 12% return in a Cat III AIF (taxed at ~42% at fund level) yields roughly 7% post-tax \u2014 barely exceeding a tax-free bond. The only honest comparison is post-tax, post-fee."},{t:"IRR vs XIRR vs Absolute",c:"A '30% return' over 3 years could mean 30% cumulative (9.1% CAGR) or 30% annualized. Always demand clarity on the metric."},{t:"Survivorship & Selection Bias",c:"Advisors present winners. Failed funds are wound down quietly. The track record you see is systematically better than reality."},{t:"The Risk-Free Baseline",c:"The 10Y G-Sec yield ("+R+"%) is your zero-risk alternative. Every basis point above must compensate for credit, liquidity, or structural risk."},{t:"The Liquidity Premium",c:"Capital locked in AIFs or real estate should earn 3-5% above liquid alternatives. If not, the lock-in is uncompensated."}].map(function(item,i){return h("div",{key:i,className:"lc"},h("div",{className:"lt"},item.t),h("div",{className:"lb"},item.c))}),
-h("div",{style:{background:"purple",border:"1px solid var(--bg3)",borderRadius:12,padding:20,marginTop:20,overflowX:"auto"}},h("div",{style:{fontFamily:"var(--mono)",fontSize:9,letterSpacing:"1.5px",textTransform:"uppercase",color:"var(--ink4)",marginBottom:14,fontWeight:500}},"Benchmark Reference"),h("table",{className:"rt"},h("thead",null,h("tr",null,["Product","Low","Mid","High","Red Flag"].map(function(x){return h("th",{key:x},x)}))),h("tbody",null,Object.keys(BM).map(function(k){var b=BM[k];return h("tr",{key:k},h("td",null,b.i+" "+b.l),h("td",{className:"n",style:{color:"var(--blue2)"}},b.r[0]+"%"),h("td",{className:"n",style:{color:"var(--green2)"}},b.r[1]+"%"),h("td",{className:"n",style:{color:"var(--amber2)"}},b.r[2]+"%"),h("td",{className:"n",style:{color:"var(--red2)"}},b.f+"%+"))}))))),
+[{t:"Gross vs Net Returns",c:"A PMS charging 2% fixed + 20% perf fee on 20% gross delivers ~14.4% net. Always ask: before or after all fees?"},{t:"Pre-Tax vs Post-Tax",c:"A 12% Cat III AIF return (taxed ~42%) yields ~7% post-tax \u2014 barely above a tax-free bond."},{t:"IRR vs XIRR vs Absolute",c:"'30% return' over 3 years: 30% cumulative (9.1% CAGR) or 30% annualized? Demand clarity."},{t:"Survivorship Bias",c:"Failed funds are wound down quietly. The track record you see is systematically better than reality."},{t:"Risk-Free Baseline",c:"10Y G-Sec ("+R+"%) is zero-risk. Every bps above must compensate for credit, liquidity, or complexity."},{t:"Liquidity Premium",c:"Locked capital should earn 3-5% above liquid alternatives. If not, the lock-in is uncompensated."}].map(function(item,i){return h("div",{key:i,className:"lc"},h("div",{className:"lt"},item.t),h("div",{className:"lbb"},item.c))}),
+h("div",{style:{background:"white",border:"1px solid var(--bg3)",borderRadius:12,padding:20,marginTop:20,overflowX:"auto"}},h("div",{style:{fontFamily:"var(--mono)",fontSize:9,letterSpacing:"1.5px",textTransform:"uppercase",color:"var(--ink4)",marginBottom:14,fontWeight:500}},"Benchmark Reference"),h("table",{className:"rt"},h("thead",null,h("tr",null,["Product","Low","Mid","High","Red Flag"].map(function(x){return h("th",{key:x},x)}))),h("tbody",null,Object.keys(BM).map(function(k){var b=BM[k];return h("tr",{key:k},h("td",null,b.i+" "+b.l),h("td",{className:"n",style:{color:"var(--blue2)"}},b.r[0]+"%"),h("td",{className:"n",style:{color:"var(--green2)"}},b.r[1]+"%"),h("td",{className:"n",style:{color:"var(--amber2)"}},b.r[2]+"%"),h("td",{className:"n",style:{color:"var(--red2)"}},b.f+"%+"))}))))),
 
-h("div",{className:"ft"},h("p",null,"Return Validator is an educational tool and does not constitute investment advice.",h("br"),"Always consult a SEBI-registered investment advisor."),h("div",{className:"sg"},"Built for Indian Investors \u00B7 v2.0")));
+h("div",{className:"ft"},h("p",null,"Return Validator is educational and does not constitute investment advice.",h("br"),"Consult a SEBI-registered advisor before investing."),h("div",{className:"sg"},"Built for Indian Investors \u00B7 v3.0")));
 }
 ReactDOM.createRoot(document.getElementById("root")).render(h(App));
 </script>
